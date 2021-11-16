@@ -1,0 +1,4 @@
+Starting audit...
+[ERROR] /Users/raresrosu/Desktop/VideosDB/oop-asignments/teme/tema/./src/main/Main.java:33:1: Utility classes should not have a public or default constructor. [HideUtilityClassConstructor]
+Audit done.
+Checkstyle ends with 1 errors.

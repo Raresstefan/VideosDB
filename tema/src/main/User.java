@@ -3,6 +3,7 @@ package main;
 import java.util.ArrayList;
 import java.util.Map;
 
+
 /**
  * Information about an user, retrieved from parsing the input test files
  * <p>

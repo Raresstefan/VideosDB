@@ -6,6 +6,7 @@ import fileio.ActorInputData;
 import java.util.ArrayList;
 import java.util.Map;
 
+
 /**
  * Information about an actor, retrieved from parsing the input test files
  * <p>

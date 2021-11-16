@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 
+
 /**
  * Information about a movie, retrieved from parsing the input test files
  * <p>

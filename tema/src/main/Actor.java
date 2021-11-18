@@ -28,12 +28,17 @@ public class Actor {
      * awards won by the actor
      */
     private Map<ActorsAwards, Integer> awards;
+    /**
+     * average grade based on ratings from movies and series
+     */
+    private Double averageGrade;
 
     public Actor(final ActorInputData actor) {
         this.name = actor.getName();
         this.careerDescription = actor.getCareerDescription();
         this.filmography = actor.getFilmography();
         this.awards = actor.getAwards();
+        this.averageGrade = 0.0;
     }
     /**
      * getter for name
@@ -70,6 +75,12 @@ public class Actor {
      */
     public String getCareerDescription() {
         return careerDescription;
+    }
+    /**
+     * getter for averageGrade
+     */
+    public Double getAverageGrade() {
+        return averageGrade;
     }
     /**
      * setter for careerDescription

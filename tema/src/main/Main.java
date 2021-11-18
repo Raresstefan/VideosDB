@@ -40,6 +40,28 @@ public final class Main {
         return null;
     }
     /**
+     * searches a serial by it's name in the list of series
+     */
+    public static Series searchSeries(final List<Series> series, final String title) {
+        for (Series currSeries : series) {
+            if (currSeries.getTitle().equals(title)) {
+                return currSeries;
+            }
+        }
+        return null;
+    }
+    /**
+     * searches a movie by it's name in the list of movies
+     */
+    public static Movie searchMovie(final List<Movie> movies, final String title) {
+        for (Movie currMovie : movies) {
+            if (currMovie.getTitle().equals(title)) {
+                return currMovie;
+            }
+        }
+        return null;
+    }
+    /**
      * Populate the actors list with the values from input
      */
     public static ArrayList<Actor> populateActors(final List<ActorInputData> actorsFromInput) {
@@ -144,36 +166,44 @@ public final class Main {
         for (ActionInputData action : actions) {
             if (action.getType() != null) {
                 JSONObject output = new JSONObject();
-                output.put("id", 1);
-                if (action.getType().equals("favorite")) {
+                if (action.getActionType().equals("command")) {
+                    // This is for commands
+                    output.put("id", 1);
                     User user = searchUser(myUsers, action.getUsername());
-//                    System.out.println(user.getUsername());
-//                    System.out.println(user.getHistory().get(action.getTitle()));
-                    boolean isSeen = user.verifyIfIsSeen(action.getTitle());
-                    String errorMessage = new String("error -> ");
-//                    System.out.println(isSeen);
-                    if (isSeen) {
-                        boolean isAlreadyFavorite = user.addVideoToFavorite(action.getTitle());
-                        if (!isAlreadyFavorite) {
-                            errorMessage = errorMessage + action.getTitle();
-                            String endString = new String(" is already in favourite list");
-                            errorMessage = errorMessage + endString;
-                            //printeaza mesaj de eroare pt ca se afla deja in favorite
-
-                        }
-                    } else {
-                        // printeaza mesaj de eroare pt ca nu este marcat ca si vazut
-
-//                        String theString = new String(action.getTitle());
-                        String endString  = new String(" is not seen");
-                        errorMessage = errorMessage + action.getTitle();
-                        errorMessage = errorMessage + endString;
-//                        errorMessage = theString + endString;
+                    String message = new String();
+                    if (action.getType().equals("favorite")) {
+                        message = user.favorite(action.getTitle());
                     }
-                    output.put("message", errorMessage);
+                    if (action.getType().equals("view")) {
+                        int increment = 1;
+                        Series serial = searchSeries(mySeries, action.getTitle());
+                        if (serial != null) {
+                            increment = serial.getNumberSeason();
+                            serial.incrementViews(increment);
+                        } else {
+                            Movie movie = searchMovie(myMovies,action.getTitle());
+                            movie.incrementViews(increment);
+                        }
+                        message = user.view(action.getTitle(), increment);
+                    }
+                    if (action.getType().equals("rating")) {
+//                        // verificam intai ce tip de video avem (film sau serial)
+                        if(action.getSeasonNumber() == 0) {
+                            // este film
+                            Movie movie = searchMovie(myMovies, action.getTitle());
+                            message = movie.addRating(user, action.getGrade());
+                        }
+                        else {
+                            Series serial = searchSeries(mySeries, action.getTitle());
+                            message = serial.addRating(user, action.getGrade(), action.getSeasonNumber());
+                        }
+                    }
+                    output.put("message", message);
                     arrayResult.add(output);
                 }
+                // next TODO: implement queries
             }
+
         }
         fileWriter.closeJSON(arrayResult);
     }

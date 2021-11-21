@@ -148,6 +148,7 @@ public final class Series extends Video {
 //        this.userWithRatedSeasons.put(seasonNumber, user.getUsername());
 //        List<Double> ratings = this.seasons.get(seasonNumber - 1).getRatings();
 //        ratings.add(grade);
+        user.getRatedMovies().add(this.getTitle());
         this.seasons.get(seasonNumber - 1).getRatings().add(grade);
         calculateAverageRatingSerial();
         String succes = new String("success -> ");

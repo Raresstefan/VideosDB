@@ -252,6 +252,16 @@ public final class Main {
             }
         }
     }
+    public static void sortUsersByActivityAsc(final List<User> users) {
+        int i, j;
+        for(i = 0; i < users.size() - 1; i++) {
+            for(j = i + 1; j < users.size(); j++) {
+                if(users.get(i).getRatedMovies().size() > users.get(j).getRatedMovies().size()) {
+                    Collections.swap(users, i, j);
+                }
+            }
+        }
+    }
 //    public static void sortAscActors(final List<Actor> actors) {
 //
 //    }
@@ -456,7 +466,6 @@ public final class Main {
                     output.put("message", message);
                     arrayResult.add(output);
                 }
-                // next TODO: implement queries for videos
                 if(action.getObjectType().equals("movies")) {
                     JSONObject output = new JSONObject();
                     output.put("id", action.getActionId());
@@ -755,8 +764,41 @@ public final class Main {
                     output.put("message", message);
                     arrayResult.add(output);
                 }
+                if(action.getObjectType().equals("users")) {
+                    JSONObject output = new JSONObject();
+                    output.put("id", action.getActionId());
+                    String message = new String("Query result: ");
+                    if(action.getCriteria().equals("num_ratings")) {
+                        List<User> usersActive = new ArrayList<>(myUsers);
+                        for(User user : myUsers) {
+                            if(user.getRatedMovies().size() == 0) {
+                                usersActive.remove(user);
+                            }
+                        }
+                        sortUsersByActivityAsc(usersActive);
+//                        if(filePath1.toString().equals("/Users/raresrosu/Desktop/VideosDB/tema/test_db/test_files/single_query_users.json")) {
+//                            for (User user : myUsers) {
+//                                System.out.println("Userul: " + user.getUsername() + " Ratings: " + user.getRatedMovies().size());
+//                            }
+//                        }
+                        if(action.getSortType().equals("desc")) {
+                            Collections.reverse(usersActive);
+                        }
+                        int i;
+                        ArrayList<String> names = new ArrayList<>();
+                        int nr_max = action.getNumber();
+                        if(action.getNumber() > usersActive.size()) {
+                            nr_max = usersActive.size();
+                        }
+                        for(i = 0; i < nr_max; i++) {
+                            names.add(usersActive.get(i).getUsername());
+                        }
+                        message = message + names.toString();
+                    }
+                    output.put("message", message);
+                    arrayResult.add(output);
+                }
             }
-
         }
         fileWriter.closeJSON(arrayResult);
     }

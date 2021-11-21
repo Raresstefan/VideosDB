@@ -99,6 +99,7 @@ public final class Movie extends Video {
             return message;
         }
         // in acest caz se poate da rate -> succes
+        user.getRatedMovies().add(this.getTitle());
         this.userWithRatings.put(user.getUsername(), grade);
         String succes = new String("success -> ");
         succes = succes + this.getTitle();

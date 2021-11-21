@@ -24,9 +24,10 @@ public final class Series extends Video {
      * The average of all ratings of the seasons of the serial
      */
     private Double averageRating;
-    //    private ArrayList<Integer> ratedSeasons;
     private Map<Integer, ArrayList<String>> userWithRatedSeasons;
     private int views;
+    private int favoriteOccurences;
+    private int totalDuration;
 
     public Series(final String title, final ArrayList<String> cast,
                   final ArrayList<String> genres,
@@ -36,9 +37,9 @@ public final class Series extends Video {
         this.numberOfSeasons = numberOfSeasons;
         this.seasons = seasons;
         this.averageRating = 0.0;
-//        this.userWithRatedSeasons = new HashMap<String, Double>();
         this.userWithRatedSeasons = new HashMap<Integer, ArrayList<String>>();
         this.views = 0;
+        this.totalDuration = 0;
     }
 
     /**
@@ -59,10 +60,21 @@ public final class Series extends Video {
     public Double getAverageRating() {
         return averageRating;
     }
+    public int getFavoriteOccurences() {
+        return favoriteOccurences;
+    }
+    public int getTotalDuration() {
+        return totalDuration;
+    }
+    public int getViews() {
+        return views;
+    }
     public void incrementViews(final int increment) {
         this.views += increment;
     }
-
+    public void incrementFavoriteOccurences() {
+        this.favoriteOccurences++;
+    }
     public Double calculateAverageRatingSeason(Season season) {
         Double average = 0.0;
         List<Double> ratings = season.getRatings();
@@ -74,7 +86,11 @@ public final class Series extends Video {
         }
         return (average / (ratings.size()));
     }
-
+    public void calculateTotalDuration() {
+        for(Season season : this.seasons) {
+            this.totalDuration += season.getDuration();
+        }
+    }
     public void calculateAverageRatingSerial() {
         Double averageSerial = 0.0;
         for (Season season : this.seasons) {
@@ -145,6 +161,11 @@ public final class Series extends Video {
         succes = succes + user.getUsername();
         message = message + succes;
         return message;
+    }
+    public void filterSeriesByRating(List<Series> filteredSeries) {
+        if(this.averageRating != 0) {
+            filteredSeries.add(this);
+        }
     }
     /**
      * toString method for this class

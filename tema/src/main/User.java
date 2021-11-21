@@ -125,45 +125,7 @@ public class User {
     /**
      * tries to add movie to ratedMovies if it has been not rated before
      */
-//    public String addToRatedMovies(final Movie movie, final Double grade) {
-//        boolean verifyHasBeenSeen = verifyIfIsSeen(movie.getTitle());
-//        boolean verifyHasBeenRated = verifyIfIsRated(movie.getTitle());
-//        String message = new String();
-//        if(!verifyHasBeenSeen) {
-//            // eroare -> nu a fost vazut
-//            String error = new String("error -> ");
-//            message = message + error;
-//            message = message + movie.getTitle();
-//            String endString = new String(" is not seen");
-//            message = message + endString;
-//            return message;
-//        }
-//        if(verifyHasBeenRated) {
-//            // eroare -> a fost deja facut rate
-//            String error = new String("error -> ");
-//            message = message + error;
-//            message = message + movie.getTitle();
-//            String endString = new String(" has been already rated");
-//            message = message + endString;
-//            return message;
-//        }
-//        this.ratedMovies.add(movie.getTitle());
-//        String succes = new String("success -> ");
-//        succes = succes + movie.getTitle();
-//        String middleString = new String(" was rated with ");
-//        String gradeString = grade.toString();
-//        middleString = middleString + gradeString;
-//        succes = succes + middleString;
-//        String str = new String(" by ");
-//        succes = succes + str;
-//        succes = succes + this.username;
-//        message = message + succes;
-//        movie.getRatings().add(grade);
-//        movie.calculateAverageRating();
-//        return message;
-//    }
 
-//    public String addToRatedSeries(final Movie movie, final Double grade)
     /**
      * view method that tries to increment the number of views
      */
@@ -190,7 +152,7 @@ public class User {
      * favorite method that tries to add a movie in the favoriteList
      */
     public String favorite(final String title) {
-        // daca filmul a fost arcat ca si vazut
+        // daca filmul a fost marcat ca si vazut
         if (verifyIfIsSeen(title)) {
             // verific daca este deja in lista de favorite
             if (!addVideoToFavorite(title)) {
@@ -204,9 +166,9 @@ public class User {
                 // cazul cand nu se afla deja in favorite -> success
                 String successMessage = new String("success -> ");
                 successMessage = successMessage + title;
-                String endString = new String(" was viewed with total views of ");
-                String viewsString = this.history.get(title).toString();
-                endString = endString + viewsString;
+                String endString = new String(" was added as favourite");
+//                String viewsString = this.history.get(title).toString();
+//                endString = endString + viewsString;
                 successMessage = successMessage + endString;
                 return successMessage;
             }

@@ -24,7 +24,6 @@ public abstract class Video {
      * Show genres
      */
     private final ArrayList<String> genres;
-
     public Video(final String title, final int year,
                      final ArrayList<String> cast, final ArrayList<String> genres) {
         this.title = title;

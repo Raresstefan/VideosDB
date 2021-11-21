@@ -2,6 +2,7 @@ package main;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -180,6 +181,30 @@ public class User {
             errorMessage = errorMessage + endString;
             return errorMessage;
         }
+    }
+    public String firstUnseenVideo(List<Video> videos) {
+        for(Video video : videos) {
+            if(!(this.history.containsKey(video.getTitle()))) {
+                return video.getTitle();
+            }
+        }
+        return null;
+    }
+    public Series firstUnseenSeries(List<Series> series) {
+        for(Series serial : series) {
+            if(!(this.history.containsKey(serial.getTitle()))) {
+                return serial;
+            }
+        }
+        return null;
+    }
+    public Movie firstBestUnseen(List<Movie> movies) {
+        for(Movie movie : movies) {
+            if(!(this.history.containsKey(movie.getTitle()))) {
+                return movie;
+            }
+        }
+        return null;
     }
     /**
      * toString method for this class

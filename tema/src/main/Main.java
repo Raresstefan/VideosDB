@@ -262,6 +262,31 @@ public final class Main {
             }
         }
     }
+    public static void sortVideosByRatings(final List<Video> videos) {
+        int i, j;
+        for (i = 0; i < videos.size() - 1; i++) {
+            for (j = i + 1; j < videos.size(); j++) {
+                Double rating1 = 0.0, rating2 = 0.0;
+                if (videos.get(i) instanceof Movie) {
+                    rating1 = ((Movie) videos.get(i)).getAverageRating();
+                } else if (videos.get(i) instanceof Series) {
+                    rating1 = ((Series) videos.get(i)).getAverageRating();
+                }
+                if (videos.get(j) instanceof Movie) {
+                    rating2 = ((Movie) videos.get(j)).getAverageRating();
+                } else if (videos.get(j) instanceof Series) {
+                    rating2 = ((Series) videos.get(j)).getAverageRating();
+                }
+                if(rating1 < rating2) {
+                    Collections.swap(videos, i, j);
+                } else if (rating1 == rating2) {
+                    if(i > j) {
+                        Collections.swap(videos, i, j);
+                    }
+                }
+            }
+        }
+    }
 //    public static void sortAscActors(final List<Actor> actors) {
 //
 //    }
@@ -794,6 +819,62 @@ public final class Main {
                             names.add(usersActive.get(i).getUsername());
                         }
                         message = message + names.toString();
+                    }
+                    output.put("message", message);
+                    arrayResult.add(output);
+                }
+            }
+            if(action.getActionType().equals("recommendation")) {
+                List<Video> videos = new ArrayList<>();
+                for(Movie movie : myMovies) {
+                    videos.add(movie);
+                }
+                for(Series serial : mySeries) {
+                    videos.add(serial);
+                }
+                if(action.getType().equals("standard")) {
+//                    System.out.println(filePath1);
+                    JSONObject output = new JSONObject();
+                    output.put("id", action.getActionId());
+                    String message;
+                    User user = searchUser(myUsers, action.getUsername());
+                    if(user == null) {
+                        message = new String("StandardRecommendation cannot be applied!");
+                    } else {
+                        String title = user.firstUnseenVideo(videos);
+                        if(title == null) {
+                            message = new String("StandardRecommendation cannot be applied!");
+                        } else {
+                            message = new String("StandardRecommendation result: ");
+                            message = message + title;
+                        }
+                    }
+                    output.put("message", message);
+                    arrayResult.add(output);
+                }
+                if(action.getType().equals("best_unseen")) {
+                    JSONObject output = new JSONObject();
+                    output.put("id", action.getActionId());
+                    String message;
+                    User user = searchUser(myUsers, action.getUsername());
+                    if(filePath1.toString().equals("/Users/raresrosu/Desktop/VideosDB/tema/test_db/test_files/single_recommendation_best_unseen.json")) {
+                        for(Video video : videos) {
+                            if(video instanceof Movie) {
+//                                System.out.println(video.g);
+                            }
+                        }
+                    }
+                    if(user == null) {
+                        message = new String("BestUnseenRecommendation cannot be applied!");
+                    } else {
+                        sortVideosByRatings(videos);
+                        String title = user.firstUnseenVideo(videos);
+                        if(title == null) {
+                            message = new String("BestRatedUnseenRecommendation cannot be applied!");
+                        } else {
+                            message = new String("BestRatedUnseenRecommendation result: ");
+                            message = message + title;
+                        }
                     }
                     output.put("message", message);
                     arrayResult.add(output);

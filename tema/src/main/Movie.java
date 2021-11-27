@@ -26,6 +26,7 @@ public final class Movie extends Video {
     private Map<String, Double> userWithRatings;
     private int views;
     private int favoriteOccurences;
+    private List<String> usersThatSeen;
 
     public Movie(final String title, final ArrayList<String> cast,
                  final ArrayList<String> genres, final int year,
@@ -37,6 +38,10 @@ public final class Movie extends Video {
         this.views = 0;
         this.userWithRatings = new HashMap<String, Double>();
         this.favoriteOccurences = 0;
+        this.usersThatSeen = new ArrayList<>();
+    }
+    public List<String> getUsersThatSeen() {
+        return usersThatSeen;
     }
     /**
      * getter for the duration of the movie
@@ -72,7 +77,11 @@ public final class Movie extends Video {
         }
     }
     public void incrementViews(final int increment) {
-        this.views += increment;
+        int add = this.views;
+        this.views = add + increment;
+    }
+    public void calculateViews(final User user, final String title) {
+        this.views = user.getHistory().get(title);
     }
     public void incrementFavoriteOccurences() {
         this.favoriteOccurences++;

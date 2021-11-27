@@ -135,10 +135,14 @@ public class User {
         if (verifyIfIsSeen(title)) {
             // increment the views
             Integer views = this.history.get(title);
-            views += increment;
+//            views += increment;
+            views += 1;
+            this.history.remove(title);
+            this.history.put(title, views);
         } else {
             // daca nu a mai fost deja vazut
-            this.history.put(title, increment);
+//            this.history.put(title, increment);
+            this.history.put(title, 1);
         }
 
         String message = new String("success -> ");

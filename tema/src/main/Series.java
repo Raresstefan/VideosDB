@@ -28,7 +28,7 @@ public final class Series extends Video {
     private int views;
     private int favoriteOccurences;
     private int totalDuration;
-
+    private List<String> usersThatSeen;
     public Series(final String title, final ArrayList<String> cast,
                   final ArrayList<String> genres,
                   final int numberOfSeasons, final ArrayList<Season> seasons,
@@ -40,8 +40,12 @@ public final class Series extends Video {
         this.userWithRatedSeasons = new HashMap<Integer, ArrayList<String>>();
         this.views = 0;
         this.totalDuration = 0;
+        this.usersThatSeen = new ArrayList<>();
     }
 
+    public List<String> getUsersThatSeen() {
+        return usersThatSeen;
+    }
     /**
      * getter for numberOfSeasons
      */
@@ -70,7 +74,8 @@ public final class Series extends Video {
         return views;
     }
     public void incrementViews(final int increment) {
-        this.views += increment;
+        int add = this.views;
+        this.views = add + increment;
     }
     public void incrementFavoriteOccurences() {
         this.favoriteOccurences++;
@@ -87,9 +92,12 @@ public final class Series extends Video {
         return (average / (ratings.size()));
     }
     public void calculateTotalDuration() {
+        int duration = 0;
         for(Season season : this.seasons) {
-            this.totalDuration += season.getDuration();
+            duration += season.getDuration();
+//            this.totalDuration += season.getDuration();
         }
+        this.totalDuration = duration;
     }
     public void calculateAverageRatingSerial() {
         Double averageSerial = 0.0;
@@ -163,9 +171,14 @@ public final class Series extends Video {
         message = message + succes;
         return message;
     }
-    public void filterSeriesByRating(List<Series> filteredSeries) {
+    public void filterSeriesByRating(final List<Series> filteredSeries) {
         if(this.averageRating != 0) {
             filteredSeries.add(this);
+        }
+    }
+    public void calculateViews(final User user, final String title) {
+        if (user.getHistory().get(title) != null) {
+            this.views = user.getHistory().get(title);
         }
     }
     /**

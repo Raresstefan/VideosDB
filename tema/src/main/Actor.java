@@ -94,10 +94,17 @@ public class Actor implements Comparable<Actor> {
     public Integer getTotalNumberOfAwards() {
         return totalNumberOfAwards;
     }
-    public void filterForWords(final List<String> words, final List<Actor> filterActors) {
+    public void filterForWords(final List<String> words, List<Actor> filterActors) {
         boolean found = true;
+        String[] separatedString = this.careerDescription.toLowerCase().split("\\s+|,\\s*|\\.\\s*|\\-");
         for (String word : words) {
-            if(!(this.careerDescription.toLowerCase().contains(word))) {
+            int ok  = 0;
+            for (String string : separatedString) {
+                if (string.equals(word)) {
+                    ok = 1;
+                }
+            }
+            if (ok == 0) {
                 found = false;
                 break;
             }
@@ -109,25 +116,32 @@ public class Actor implements Comparable<Actor> {
     public void filterForAwards(final List<String> awards, final List<Actor> filterActors) {
         boolean found = true;
         for(String award : awards) {
-            if(!(this.awards.containsKey(award))) {
+            ActorsAwards awardEnumValue = ActorsAwards.valueOf(award);
+            if(!(this.awards.containsKey(awardEnumValue))) {
                 found = false;
                 break;
             }
         }
-        if(filterActors.size() != 0) {
-            if(!found) {
-                filterActors.remove(this);
-            }
-        } else {
-            if(found) {
-                filterActors.add(this);
-            }
+        if (found) {
+            filterActors.add(this);
         }
+//        if(filterActors.size() != 0) {
+//            if(!found) {
+//                filterActors.remove(this);
+//            }
+//        } else {
+//            if(found) {
+//                filterActors.add(this);
+//            }
+//        }
     }
     public void calculateTotalAwards() {
+        Integer totalNumber = 0;
         for(Map.Entry<ActorsAwards, Integer> entry : awards.entrySet()) {
-            this.totalNumberOfAwards += entry.getValue();
+//            this.totalNumberOfAwards += entry.getValue();
+            totalNumber += entry.getValue();
         }
+        this.totalNumberOfAwards = totalNumber;
     }
     public Movie searchMovie(final String title, final List<Movie> movies) {
         for(Movie movie : movies) {
@@ -147,24 +161,26 @@ public class Actor implements Comparable<Actor> {
     }
     public void calculateAverageGrade(final List<Movie> movies, final List<Series> series) {
         int count = 0;
+        Double average = 0.0;
         for(String video : this.filmography) {
             Movie movie = searchMovie(video, movies);
             Series serial = searchSeries(video, series);
             if(movie != null) {
+
                 if(!(movie.getAverageRating().equals(0.0))) {
-                    this.averageGrade += movie.getAverageRating();
+                    average += movie.getAverageRating();
                     count++;
                 }
             } else if(serial != null) {
+
                 if(!(serial.getAverageRating().equals(0.0))) {
-                    this.averageGrade += serial.getAverageRating();
+                    average += serial.getAverageRating();
                     count++;
                 }
             }
         }
-//        return ("count e " + count);
         if(count != 0) {
-            this.averageGrade = this.averageGrade / count;
+            this.averageGrade = average / count;
         }
     }
     /**

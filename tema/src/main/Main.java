@@ -1,4 +1,5 @@
 package main;
+import actor.ActorsAwards;
 import checker.Checkstyle;
 import checker.Checker;
 import common.Constants;
@@ -127,7 +128,7 @@ public final class Main {
                 if(actors.get(i).getAverageGrade() < actors.get(j).getAverageGrade()) {
                     Collections.swap(actors, i, j);
                 } else if(actors.get(i).getAverageGrade().equals(actors.get(j).getAverageGrade())) {
-                    if(actors.get(i).getName().compareTo(actors.get(j).getName()) > 0) {
+                    if(actors.get(i).getName().compareTo(actors.get(j).getName()) < 0) {
                         Collections.swap(actors, i, j);
                     }
                 }
@@ -155,7 +156,7 @@ public final class Main {
                 if(actors.get(i).getTotalNumberOfAwards() < actors.get(j).getTotalNumberOfAwards()) {
                     Collections.swap(actors, i, j);
                 } else if(actors.get(i).getTotalNumberOfAwards().equals(actors.get(j).getTotalNumberOfAwards())) {
-                    if(actors.get(i).getName().compareTo(actors.get(j).getName()) > 0) {
+                    if(actors.get(i).getName().compareTo(actors.get(j).getName()) < 0) {
                         Collections.swap(actors, i, j);
                     }
                 }
@@ -178,6 +179,24 @@ public final class Main {
             for(j = i + 1; j < movies.size(); j++) {
                 if(movies.get(i).getAverageRating() > movies.get(j).getAverageRating()) {
                     Collections.swap(movies, i, j);
+                } else if (movies.get(i).getAverageRating().equals(movies.get(j).getAverageRating())) {
+                    if (movies.get(i).getTitle().compareTo(movies.get(j).getTitle()) > 0) {
+                        Collections.swap(movies, i, j);
+                    }
+                }
+            }
+        }
+    }
+    public static void sortMoviesByRatingDesc(final List<Movie> movies) {
+        int i, j;
+        for(i = 0; i < movies.size() - 1; i++) {
+            for(j = i + 1; j < movies.size(); j++) {
+                if(movies.get(i).getAverageRating() > movies.get(j).getAverageRating()) {
+                    Collections.swap(movies, i, j);
+                } else if (movies.get(i).getAverageRating().equals(movies.get(j).getAverageRating())) {
+                    if (movies.get(i).getTitle().compareTo(movies.get(j).getTitle()) < 0) {
+                        Collections.swap(movies, i, j);
+                    }
                 }
             }
         }
@@ -188,6 +207,24 @@ public final class Main {
             for(j = i + 1; j < series.size(); j++) {
                 if(series.get(i).getAverageRating() > series.get(j).getAverageRating()) {
                     Collections.swap(series, i, j);
+                } else if (series.get(i).getAverageRating().equals(series.get(j).getAverageRating())) {
+                    if (series.get(i).getTitle().compareTo(series.get(j).getTitle()) > 0) {
+                        Collections.swap(series, i, j);
+                    }
+                }
+            }
+        }
+    }
+    public static void sortSeriesByRatingDesc(final List<Series> series) {
+        int i, j;
+        for(i = 0; i < series.size() - 1; i++) {
+            for(j = i + 1; j < series.size(); j++) {
+                if(series.get(i).getAverageRating() < series.get(j).getAverageRating()) {
+                    Collections.swap(series, i, j);
+                } else if (series.get(i).getAverageRating().equals(series.get(j).getAverageRating())) {
+                    if (series.get(i).getTitle().compareTo(series.get(j).getTitle()) < 0) {
+                        Collections.swap(series, i, j);
+                    }
                 }
             }
         }
@@ -198,6 +235,24 @@ public final class Main {
             for(j = i + 1; j < movies.size(); j++) {
                 if(movies.get(i).getFavoriteOccurences() > movies.get(j).getFavoriteOccurences()) {
                     Collections.swap(movies, i, j);
+                } else if (movies.get(i).getFavoriteOccurences() == movies.get(j).getFavoriteOccurences()) {
+                    if (movies.get(i).getTitle().compareTo(movies.get(j).getTitle()) > 0) {
+                        Collections.swap(movies, i, j);
+                    }
+                }
+            }
+        }
+    }
+    public static void sortMoviesByFavoriteDesc(final List<Movie> movies) {
+        int i, j;
+        for(i = 0; i < movies.size() - 1; i++) {
+            for(j = i + 1; j < movies.size(); j++) {
+                if(movies.get(i).getFavoriteOccurences() < movies.get(j).getFavoriteOccurences()) {
+                    Collections.swap(movies, i, j);
+                } else if (movies.get(i).getFavoriteOccurences() == movies.get(j).getFavoriteOccurences()) {
+                    if (movies.get(i).getTitle().compareTo(movies.get(j).getTitle()) < 0) {
+                        Collections.swap(movies, i, j);
+                    }
                 }
             }
         }
@@ -208,6 +263,24 @@ public final class Main {
             for(j = i + 1; j < series.size(); j++) {
                 if(series.get(i).getFavoriteOccurences() > series.get(j).getFavoriteOccurences()) {
                     Collections.swap(series, i, j);
+                } else if (series.get(i).getFavoriteOccurences() == series.get(j).getFavoriteOccurences()) {
+                    if (series.get(i).getTitle().compareTo(series.get(j).getTitle()) > 0) {
+                        Collections.swap(series, i, j);
+                    }
+                }
+            }
+        }
+    }
+    public static void sortSeriesByFavoriteDesc(final List<Series> series) {
+        int i, j;
+        for(i = 0; i < series.size() - 1; i++) {
+            for(j = i + 1; j < series.size(); j++) {
+                if(series.get(i).getFavoriteOccurences() < series.get(j).getFavoriteOccurences()) {
+                    Collections.swap(series, i, j);
+                } else if (series.get(i).getFavoriteOccurences() == series.get(j).getFavoriteOccurences()) {
+                    if (series.get(i).getTitle().compareTo(series.get(j).getTitle()) < 0) {
+                        Collections.swap(series, i, j);
+                    }
                 }
             }
         }
@@ -218,6 +291,24 @@ public final class Main {
             for(j = i + 1; j < movies.size(); j++) {
                 if(movies.get(i).getDuration() > movies.get(j).getDuration()) {
                     Collections.swap(movies, i, j);
+                } else if (movies.get(i).getDuration() == movies.get(j).getDuration()) {
+                    if (movies.get(i).getTitle().compareTo(movies.get(j).getTitle()) > 0) {
+                        Collections.swap(movies, i, j);
+                    }
+                }
+            }
+        }
+    }
+    public static void sortMoviesByLongestDesc(final List<Movie> movies) {
+        int i, j;
+        for(i = 0; i < movies.size() - 1; i++) {
+            for(j = i + 1; j < movies.size(); j++) {
+                if(movies.get(i).getDuration() < movies.get(j).getDuration()) {
+                    Collections.swap(movies, i, j);
+                } else if (movies.get(i).getDuration() == movies.get(j).getDuration()) {
+                    if (movies.get(i).getTitle().compareTo(movies.get(j).getTitle()) < 0) {
+                        Collections.swap(movies, i, j);
+                    }
                 }
             }
         }
@@ -228,6 +319,24 @@ public final class Main {
             for(j = i + 1; j < series.size(); j++) {
                 if(series.get(i).getTotalDuration() > series.get(j).getTotalDuration()) {
                     Collections.swap(series, i, j);
+                } else if (series.get(i).getTotalDuration() == series.get(j).getTotalDuration()) {
+                    if (series.get(i).getTitle().compareTo(series.get(j).getTitle()) > 0) {
+                        Collections.swap(series, i, j);
+                    }
+                }
+            }
+        }
+    }
+    public static void sortSeriesByLongestDesc(final List<Series> series) {
+        int i, j;
+        for(i = 0; i < series.size() - 1; i++) {
+            for(j = i + 1; j < series.size(); j++) {
+                if(series.get(i).getTotalDuration() < series.get(j).getTotalDuration()) {
+                    Collections.swap(series, i, j);
+                } else if (series.get(i).getTotalDuration() == series.get(j).getTotalDuration()) {
+                    if (series.get(i).getTitle().compareTo(series.get(j).getTitle()) < 0) {
+                        Collections.swap(series, i, j);
+                    }
                 }
             }
         }
@@ -238,6 +347,24 @@ public final class Main {
             for(j = i + 1; j < movies.size(); j++) {
                 if(movies.get(i).getViews() > movies.get(j).getViews()) {
                     Collections.swap(movies, i, j);
+                } else if (movies.get(i).getViews() == movies.get(j).getViews()) {
+                    if (movies.get(i).getTitle().compareTo(movies.get(j).getTitle()) > 0) {
+                        Collections.swap(movies, i, j);
+                    }
+                }
+            }
+        }
+    }
+    public static void sortMoviesByViewsDesc(final List<Movie> movies) {
+        int i, j;
+        for(i = 0; i < movies.size() - 1; i++) {
+            for(j = i + 1; j < movies.size(); j++) {
+                if(movies.get(i).getViews() < movies.get(j).getViews()) {
+                    Collections.swap(movies, i, j);
+                } else if (movies.get(i).getViews() == movies.get(j).getViews()) {
+                    if (movies.get(i).getTitle().compareTo(movies.get(j).getTitle()) < 0) {
+                        Collections.swap(movies, i, j);
+                    }
                 }
             }
         }
@@ -248,6 +375,24 @@ public final class Main {
             for(j = i + 1; j < series.size(); j++) {
                 if(series.get(i).getViews() > series.get(j).getViews()) {
                     Collections.swap(series, i, j);
+                } else if (series.get(i).getViews() == series.get(j).getViews()) {
+                    if (series.get(i).getTitle().compareTo(series.get(j).getTitle()) > 0) {
+                        Collections.swap(series, i, j);
+                    }
+                }
+            }
+        }
+    }
+    public static void sortSeriesByViewsDesc(final List<Series> series) {
+        int i, j;
+        for(i = 0; i < series.size() - 1; i++) {
+            for(j = i + 1; j < series.size(); j++) {
+                if(series.get(i).getViews() < series.get(j).getViews()) {
+                    Collections.swap(series, i, j);
+                } else if (series.get(i).getViews() == series.get(j).getViews()) {
+                    if (series.get(i).getTitle().compareTo(series.get(j).getTitle()) < 0) {
+                        Collections.swap(series, i, j);
+                    }
                 }
             }
         }
@@ -258,6 +403,24 @@ public final class Main {
             for(j = i + 1; j < users.size(); j++) {
                 if(users.get(i).getRatedMovies().size() > users.get(j).getRatedMovies().size()) {
                     Collections.swap(users, i, j);
+                } else if (users.get(i).getRatedMovies().size() == users.get(j).getRatedMovies().size()) {
+                    if (users.get(i).getUsername().compareTo(users.get(j).getUsername()) > 0) {
+                        Collections.swap(users, i, j);
+                    }
+                }
+            }
+        }
+    }
+    public static void sortUsersByActivityDesc(final List<User> users) {
+        int i, j;
+        for(i = 0; i < users.size() - 1; i++) {
+            for(j = i + 1; j < users.size(); j++) {
+                if(users.get(i).getRatedMovies().size() < users.get(j).getRatedMovies().size()) {
+                    Collections.swap(users, i, j);
+                } else if (users.get(i).getRatedMovies().size() == users.get(j).getRatedMovies().size()) {
+                    if (users.get(i).getUsername().compareTo(users.get(j).getUsername()) < 0) {
+                        Collections.swap(users, i, j);
+                    }
                 }
             }
         }
@@ -279,13 +442,159 @@ public final class Main {
                 }
                 if(rating1 < rating2) {
                     Collections.swap(videos, i, j);
-                } else if (rating1 == rating2) {
+                } else if (rating1.equals(rating2)) {
                     if(i > j) {
                         Collections.swap(videos, i, j);
                     }
                 }
             }
         }
+    }
+    public static void initialisePopularityMap(final HashMap<String, Integer> map, final List<Video> videos, final HashMap<String, ArrayList<String>> videosByGenres) {
+        for (Video video : videos) {
+            for (String genre : video.getGenres()) {
+                if (map.containsKey(genre)) {
+                    videosByGenres.get(genre).add(video.getTitle());
+                    Integer views = map.get(genre);
+                    map.remove(genre);
+                    if (video instanceof Movie) {
+                        map.put(genre, views + ((Movie) video).getViews());
+                    } else if (video instanceof Series) {
+                        map.put(genre, views + ((Series) video).getViews());
+                    }
+                } else {
+                    ArrayList<String> titles = new ArrayList<>();
+                    titles.add(video.getTitle());
+                    videosByGenres.put(genre, titles);
+                    if (video instanceof Movie) {
+                        map.put(genre, ((Movie) video).getViews());
+                    } else if (video instanceof Series) {
+                        map.put(genre, ((Series) video).getViews());
+                    }
+                }
+
+            }
+        }
+    }
+    public static List<String> createListOfGenres(final Map<String, Integer> map) {
+        List<String> genres = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            genres.add(entry.getKey());
+        }
+        return genres;
+    }
+    public static void sortGenres(final List<String> genres, final HashMap<String, Integer> map) {
+        int i, j;
+        for(i = 0; i < genres.size() - 1; i++) {
+            for(j = i + 1; j < genres.size(); j++) {
+                if(map.get(genres.get(i)) < map.get(genres.get(j))) {
+                    Collections.swap(genres, i, j);
+                } else if (map.get(genres.get(i)) == map.get(genres.get(j))) {
+                    if(i > j) {
+                        Collections.swap(genres, i, j);
+                    }
+                }
+            }
+        }
+    }
+    public static String findFirstUnseenPopularVideo(final List<String> genres, final User user, final HashMap<String, ArrayList<String>> videosByGenres) {
+        for(String gen : genres) {
+            for(String video : videosByGenres.get(gen)) {
+                if(!(user.getHistory().containsKey(video))) {
+                    return video;
+                }
+            }
+        }
+        return null;
+    }
+    public static List<String> createFavoriteList(final List<User> users) {
+        List<String> videos = new ArrayList<>();
+        for (User user : users) {
+            for (String favorite : user.getFavoriteMovies()) {
+                if(!(videos.contains(favorite))) {
+                    videos.add(favorite);
+                }
+            }
+        }
+        return videos;
+    }
+    public static void initialiseFavoriteMap(final HashMap<String, Integer> map, final List<User> users) {
+        for (User user : users) {
+            for (String favorite : user.getFavoriteMovies()) {
+                if (map.containsKey(favorite)) {
+                    Integer favOccurences = map.get(favorite);
+                    map.remove(favorite);
+                    map.put(favorite, favOccurences + 1);
+                } else {
+                    map.put(favorite, 1);
+                }
+            }
+        }
+    }
+    public static void sortFavoriteVidList(final List<String> videos, final HashMap<String, Integer> map) {
+        int i, j;
+        for (i = 0; i < videos.size() - 1; i++) {
+            for (j = i + 1; j < videos.size(); j++) {
+                if (map.get(videos.get(i)) < map.get(videos.get(j))) {
+                    Collections.swap(videos, i, j);
+                } else if (map.get(videos.get(i)) == map.get(videos.get(j))) {
+                    if (i > j) {
+                        Collections.swap(videos, i, j);
+                    }
+                }
+            }
+        }
+    }
+    public static String findFirstFavUnseen(final User user, final List<String> videos) {
+        for (String video : videos) {
+            if (!(user.getHistory().containsKey(video))) {
+                return video;
+            }
+        }
+        return null;
+    }
+    public static List<Video> initialiseVideosOfGenre(final List<Video> videos, final String genre) {
+        List<Video> videosOfGenre = new ArrayList<>();
+        for (Video video : videos) {
+            if (video.getGenres().contains(genre)) {
+                videosOfGenre.add(video);
+            }
+        }
+        return videosOfGenre;
+    }
+    public static void sortByRating(final List<Video> videos) {
+        int i, j;
+        for (i = 0; i < videos.size() - 1; i++) {
+            for (j = i + 1; j < videos.size(); j++) {
+                Double rating1 = 0.0, rating2 = 0.0;
+                if (videos.get(i) instanceof Movie) {
+                    rating1 = ((Movie) videos.get(i)).getAverageRating();
+                } else if (videos.get(i) instanceof Series) {
+                    rating1 = ((Series) videos.get(i)).getAverageRating();
+                }
+                if (videos.get(j) instanceof Movie) {
+                    rating2 = ((Movie) videos.get(j)).getAverageRating();
+                } else if (videos.get(j) instanceof Series) {
+                    rating2 = ((Series) videos.get(j)).getAverageRating();
+                }
+                if(rating1 < rating2) {
+                    Collections.swap(videos, i, j);
+                } else if (rating1.equals(rating2)) {
+                    if (videos.get(i).getTitle().compareTo(videos.get(j).getTitle()) > 0) {
+                        Collections.swap(videos, i, j);
+                    }
+                }
+            }
+        }
+    }
+    public static List<Video> videosUnseen (final User user, final List<Video> videos) {
+        List<Video> unseenVideos = new ArrayList<>();
+        for (Video video : videos) {
+            if (!(user.getHistory().containsKey(video.getTitle()))) {
+                unseenVideos.add(video);
+            }
+        }
+        return unseenVideos;
     }
 //    public static void sortAscActors(final List<Actor> actors) {
 //
@@ -361,14 +670,40 @@ public final class Main {
                 if (action.getType().equals("view")) {
                     int increment = 1;
                     Series serial = searchSeries(mySeries, action.getTitle());
+                    Movie movie = searchMovie(myMovies, action.getTitle());
+
                     if (serial != null) {
+//                        serial.incrementViews(increment);
+//                        if (!(user.getHistory().containsKey(serial.getTitle()))) {
+//                            user.getHistory().put(serial.getTitle(), 1);
+//                        } else {
+//                            Integer noViews = user.getHistory().get(serial.getTitle());
+//                            user.getHistory().remove(serial.getTitle());
+//                            user.getHistory().put(serial.getTitle(), noViews + 1);
+//                        }
                         increment = serial.getNumberSeason();
-                        serial.incrementViews(increment);
-                    } else {
-                        Movie movie = searchMovie(myMovies, action.getTitle());
-                        movie.incrementViews(increment);
                     }
+//                    else {
+//                        Movie movie = searchMovie(myMovies, action.getTitle());
+//                        movie.incrementViews(increment);
+//                        if (!(user.getHistory().containsKey(movie.getTitle()))) {
+//                            user.getHistory().put(movie.getTitle(), 1);
+//                        } else {
+//                            Integer noViews = user.getHistory().get(movie.getTitle());
+//                            user.getHistory().remove(movie.getTitle());
+//                            user.getHistory().put(movie.getTitle(), noViews + 1);
+//                        }
+//                    }
                     message = user.view(action.getTitle(), increment);
+                    if (serial != null) {
+                        serial.getUsersThatSeen().add(user.getUsername());
+                        serial.calculateViews(user, serial.getTitle());
+//                        serial.incrementViews(1);
+                    } else {
+                        movie.getUsersThatSeen().add(user.getUsername());
+                        movie.calculateViews(user, movie.getTitle());
+//                        movie.incrementViews(1);
+                    }
                 }
                 if (action.getType().equals("rating")) {
                     // verificam intai ce tip de video avem (film sau serial)
@@ -387,46 +722,18 @@ public final class Main {
             // implement queries
             if(action.getActionType().equals("query")) {
                 if(action.getObjectType().equals("actors")) {
-                    // cream copie a listei de actori pentru filtrare
-                    List<Actor> filterActors = new ArrayList<>();
-//                    Collections.copy(filterActors, myActors);
-                    // daca avem filtru cu words
-//                    System.out.println(action.getFilters().get(0).get(0));
                     List<String> words = action.getFilters().get(2);
                     List<String> awards = action.getFilters().get(3);
-                    // aplic filtrare pt words daca e nevoie
-                    if(words != null) {
-                        for(Actor actor : myActors) {
-                            actor.filterForWords(words, filterActors);
-                        }
-                    }
-                    // aplica filtre pentru awards pe filterActors -> foloseste removeIf, fa metoda in Actor
-                    if(awards != null) {
-                        for(Actor actor : filterActors) {
-                            actor.filterForAwards(awards, filterActors);
-                        }
-                    }
-                    List<Actor> actorsToWork;
-                    if(awards == null && words == null) { // nu s-au aplicat filtre
-//                        List<Actor> sortActors = new ArrayList<>(myActors);
-                        actorsToWork = new ArrayList<>(myActors);
-                    } else {
-                        actorsToWork = new ArrayList<>(filterActors);
-                    }
                     JSONObject output = new JSONObject();
                     output.put("id", action.getActionId());
-                    for(Actor actor : actorsToWork) {
-//               String message = actor.calculateAverageGrade(myMovies, mySeries);
-                        actor.calculateAverageGrade(myMovies, mySeries);
-//                System.out.println(message);
-                    }
 
 
                     String message = new String("Query result: ");
                     // query pentru average
                     if(action.getCriteria().equals("average")) {
                         List<Actor> actorsWithRatings = new ArrayList<>();
-                        for(Actor actor : actorsToWork) {
+                        for(Actor actor : myActors) {
+                            actor.calculateAverageGrade(myMovies, mySeries);
                             if(!(actor.getAverageGrade().equals(0.0))) {
                                 actorsWithRatings.add(actor);
                             }
@@ -452,13 +759,22 @@ public final class Main {
                     }
                     // query pentru awards
                     if(action.getCriteria().equals("awards")) {
+//                        System.out.println(filePath1);
+                        List<Actor> filterActors = new ArrayList<>();
+                        if(awards != null) {
+                            for(Actor actor : myActors) {
+                                actor.filterForAwards(awards, filterActors);
+                            }
+                        }
+
                         for(Actor actor : filterActors) {
                             actor.calculateTotalAwards();
                         }
-                        if(action.getSortType().equals("asc")) {
+                        if (action.getSortType().equals("asc")) {
                             sortActorsByAwardsAsc(filterActors);
                         }
                         if(action.getSortType().equals("desc")) {
+//                            Collections.reverse(filterActors);
                             sortActorsByAwardsDesc(filterActors);
                         }
                         int i;
@@ -473,18 +789,34 @@ public final class Main {
                         message = message + names.toString();
                     }
                     if(action.getCriteria().equals("filter_description")) {
+                        List<Actor> filterActors = new ArrayList<>();
+                        for (Actor actor : myActors) {
+                            actor.filterForWords(words, filterActors);
+                        }
+//                        if (filePath1.toString().equals("/Users/raresrosu/Desktop/VideosDB/tema/test_db/test_files/large_test_no_9.json") && action.getActionId() == 56) {
+//                            System.out.println(filterActors.size());
+//                            for (Actor actor : myActors) {
+//                                    String string = actor.getCareerDescription();
+//                                    String[] separatedString = string.split("-|\\.|\\s");
+//                                System.out.println("Actorul: " + actor.getName());
+//                                    System.out.println(Arrays.toString(separatedString));
+//                            }
+//                        }
                         sortActorsAlphabetically(filterActors);
                         if(action.getSortType().equals("desc")) {
                             Collections.reverse(filterActors);
                         }
-                        int i;
+//                        int i;
                         ArrayList<String> names = new ArrayList<>();
-                        int nr_max = action.getNumber();
-                        if(action.getNumber() > filterActors.size()) {
-                            nr_max = filterActors.size();
-                        }
-                        for(i = 0; i < nr_max; i++) {
-                            names.add(filterActors.get(i).getName());
+//                        int nr_max = action.getNumber();
+//                        if(action.getNumber() > filterActors.size()) {
+//                            nr_max = filterActors.size();
+//                        }
+//                        for(i = 0; i < filterActors.size(); i++) {
+//                            names.add(filterActors.get(i).getName());
+//                        }
+                        for (Actor actor : filterActors) {
+                            names.add(actor.getName());
                         }
                         message = message + names.toString();
                     }
@@ -532,9 +864,11 @@ public final class Main {
                     String message = new String("Query result: ");
                     // am aplicat toate filtrele => facem sortarea
                     if(action.getCriteria().equals("ratings")) {
-                        sortMoviesByRatingAsc(filteredMovies);
+                        if (action.getSortType().equals("asc")) {
+                            sortMoviesByRatingAsc(filteredMovies);
+                        }
                         if(action.getSortType().equals("desc")) {
-                            Collections.reverse(filteredMovies);
+                            sortMoviesByRatingDesc(filteredMovies);
                         }
                         int i;
                         ArrayList<String> names = new ArrayList<>();
@@ -565,9 +899,11 @@ public final class Main {
                         for(Movie movie : moviesWithoutFavoriteOcc) {
                             filteredMovies.remove(movie);
                         }
-                        sortMoviesByFavoriteAsc(filteredMovies);
+                        if (action.getSortType().equals("asc")) {
+                            sortMoviesByFavoriteAsc(filteredMovies);
+                        }
                         if(action.getSortType().equals("desc")) {
-                            Collections.reverse(filteredMovies);
+                            sortMoviesByFavoriteDesc(filteredMovies);
                         }
                         int i;
                         ArrayList<String> names = new ArrayList<>();
@@ -581,9 +917,11 @@ public final class Main {
                         message = message + names.toString();
                     }
                     if(action.getCriteria().equals("longest")) {
-                        sortMoviesByLongestAsc(filteredMovies);
+                        if (action.getSortType().equals("asc")) {
+                            sortMoviesByLongestAsc(filteredMovies);
+                        }
                         if(action.getSortType().equals("desc")) {
-                            Collections.reverse(filteredMovies);
+                            sortMoviesByLongestDesc(filteredMovies);
                         }
                         int i;
                         ArrayList<String> names = new ArrayList<>();
@@ -597,23 +935,20 @@ public final class Main {
                         message = message + names.toString();
                     }
                     if(action.getCriteria().equals("most_viewed")) {
-//                        System.out.println(filePath1);
-//                        if(filePath1.toString().equals("/Users/raresrosu/Desktop/VideosDB/tema/test_db/test_files/single_query_most_viewed_movie.json")) {
-//                            for(User user : myUsers) {
-//                                for(Map.Entry<String, Integer> entry : user.getHistory().entrySet()) {
-//                                    Movie possibleMovie = searchMovie(filteredMovies, entry.getKey());
-//                                    if(possibleMovie != null) {
-//                                        possibleMovie.incrementViews(entry.getValue());
-//                                        System.out.println("Movie : " + possibleMovie.getTitle() + " Views " + possibleMovie.getViews());
-//                                    }
-//                                }
-//                            }
-//                        }
                         for(User user : myUsers) {
                             for(Map.Entry<String, Integer> entry : user.getHistory().entrySet()) {
                                 Movie possibleMovie = searchMovie(filteredMovies, entry.getKey());
                                 if(possibleMovie != null) {
+//                                    if (!(possibleMovie.getUsersThatSeen().contains(user.getUsername()))) {
+//                                        possibleMovie.calculateViews(user, possibleMovie.getTitle());
+//                                    }
                                     possibleMovie.incrementViews(entry.getValue());
+//                                    if (possibleMovie.getUsersThatSeen().contains(user.getUsername())) {
+//                                        possibleMovie.calculateViews(user, possibleMovie.getTitle());
+//                                    } else {
+//                                        possibleMovie.incrementViews(entry.getValue());
+//                                    }
+//                                    possibleMovie.calculateViews(user, possibleMovie.getTitle());
                                 }
                             }
                         }
@@ -626,9 +961,11 @@ public final class Main {
                         for(Movie movie : moviesWithoutViews) {
                             filteredMovies.remove(movie);
                         }
-                        sortMoviesByViewsAsc(filteredMovies);
+                        if (action.getSortType().equals("asc")) {
+                            sortMoviesByViewsAsc(filteredMovies);
+                        }
                         if(action.getSortType().equals("desc")) {
-                            Collections.reverse(filteredMovies);
+                            sortMoviesByViewsDesc(filteredMovies);
                         }
                         int i;
                         ArrayList<String> names = new ArrayList<>();
@@ -689,9 +1026,11 @@ public final class Main {
                     String message = new String("Query result: ");
                     // am aplicat toate filtrele => facem sortarea
                     if(action.getCriteria().equals("ratings")) {
-                        sortSeriesByRatingAsc(filteredSeries);
+                        if (action.getSortType().equals("asc")) {
+                            sortSeriesByRatingAsc(filteredSeries);
+                        }
                         if(action.getSortType().equals("desc")) {
-                            Collections.reverse(filteredSeries);
+                            sortSeriesByRatingDesc(filteredSeries);
                         }
                         int i;
                         ArrayList<String> names = new ArrayList<>();
@@ -722,9 +1061,11 @@ public final class Main {
                         for(Series serial : serialsWithoutFavOcc) {
                             filteredSeries.remove(serial);
                         }
-                        sortSeriesByFavoriteAsc(filteredSeries);
+                        if (action.getSortType().equals("asc")) {
+                            sortSeriesByFavoriteAsc(filteredSeries);
+                        }
                         if(action.getSortType().equals("desc")) {
-                            Collections.reverse(filteredSeries);
+                            sortSeriesByFavoriteDesc(filteredSeries);
                         }
                         int i;
                         ArrayList<String> names = new ArrayList<>();
@@ -738,9 +1079,11 @@ public final class Main {
                         message = message + names.toString();
                     }
                     if(action.getCriteria().equals("longest")) {
-                        sortSeriesByLongestAsc(filteredSeries);
+                        if (action.getSortType().equals("asc")) {
+                            sortSeriesByLongestAsc(filteredSeries);
+                        }
                         if(action.getSortType().equals("desc")) {
-                            Collections.reverse(filteredSeries);
+                            sortSeriesByLongestDesc(filteredSeries);
                         }
                         int i;
                         ArrayList<String> names = new ArrayList<>();
@@ -758,7 +1101,21 @@ public final class Main {
                             for(Map.Entry<String, Integer> entry : user.getHistory().entrySet()) {
                                 Series possibleSerial = searchSeries(filteredSeries, entry.getKey());
                                 if(possibleSerial != null) {
+//                                    if (!(possibleSerial.getUsersThatSeen().contains(user.getUsername()))) {
+////                                        possibleSerial.calculateViews(user, possibleSerial.getTitle());
+//                                        possibleSerial.incrementViews();
+//                                    }
                                     possibleSerial.incrementViews(entry.getValue());
+//                                    if (possibleSerial.getUsersThatSeen().contains(user.getUsername())) {
+//                                        possibleSerial.calculateViews(user, possibleSerial.getTitle());
+//                                    } else {
+//                                        possibleSerial.incrementViews(entry.getValue());
+//                                    }
+//                                    possibleSerial.calculateViews(user, possibleSerial.getTitle());
+                                }
+                                if (filePath1.toString().equals("/Users/raresrosu/Desktop/VideosDB/tema/test_db/test_files/single_query_most_viewed_show.json")) {
+                                    System.out.println("Showul: " + entry.getKey());
+                                    System.out.println("Views: " + entry.getValue());
                                 }
                             }
                         }
@@ -771,10 +1128,18 @@ public final class Main {
                         for(Series serial : seriesWithoutViews) {
                             filteredSeries.remove(serial);
                         }
-                        sortSeriesByViewsAsc(filteredSeries);
-                        if(action.getSortType().equals("desc")) {
-                            Collections.reverse(filteredSeries);
+                        if (action.getSortType().equals("asc")) {
+                            sortSeriesByViewsAsc(filteredSeries);
                         }
+                        if(action.getSortType().equals("desc")) {
+                            sortSeriesByViewsDesc(filteredSeries);
+                        }
+//                        if (filePath1.toString().equals("/Users/raresrosu/Desktop/VideosDB/tema/test_db/test_files/large_test_no_9.json") && action.getActionId() == 76) {
+//                            for (Series serial : filteredSeries) {
+//                                System.out.println("Serial: " + serial.getTitle() + "Views: " + serial.getViews());
+//                            }
+//                        }
+//                        System.out.println(filePath1);
                         int i;
                         ArrayList<String> names = new ArrayList<>();
                         int nr_max = action.getNumber();
@@ -800,14 +1165,11 @@ public final class Main {
                                 usersActive.remove(user);
                             }
                         }
-                        sortUsersByActivityAsc(usersActive);
-//                        if(filePath1.toString().equals("/Users/raresrosu/Desktop/VideosDB/tema/test_db/test_files/single_query_users.json")) {
-//                            for (User user : myUsers) {
-//                                System.out.println("Userul: " + user.getUsername() + " Ratings: " + user.getRatedMovies().size());
-//                            }
-//                        }
+                        if (action.getSortType().equals("asc")) {
+                            sortUsersByActivityAsc(usersActive);
+                        }
                         if(action.getSortType().equals("desc")) {
-                            Collections.reverse(usersActive);
+                            sortUsersByActivityDesc(usersActive);
                         }
                         int i;
                         ArrayList<String> names = new ArrayList<>();
@@ -857,17 +1219,24 @@ public final class Main {
                     output.put("id", action.getActionId());
                     String message;
                     User user = searchUser(myUsers, action.getUsername());
-                    if(filePath1.toString().equals("/Users/raresrosu/Desktop/VideosDB/tema/test_db/test_files/single_recommendation_best_unseen.json")) {
-                        for(Video video : videos) {
-                            if(video instanceof Movie) {
-//                                System.out.println(video.g);
-                            }
-                        }
-                    }
+//                    if(filePath1.toString().equals("/Users/raresrosu/Desktop/VideosDB/tema/test_db/test_files/single_recommendation_best_unseen.json")) {
+//                        for(Video video : videos) {
+//                            if(video instanceof Movie) {
+////                                System.out.println(video.g);
+//                            }
+//                        }
+//                    }
                     if(user == null) {
                         message = new String("BestUnseenRecommendation cannot be applied!");
                     } else {
                         sortVideosByRatings(videos);
+                        System.out.println(filePath1);
+//                        if (filePath1.toString().equals("/Users/raresrosu/Desktop/VideosDB/tema/test_db/test_files/large_test_no_8.json")) {
+//                            for (Video video : videos) {
+////                                if (vi)
+//                                System.out.println("Titlu: " + video.getTitle() + " Rating: " + video);
+//                            }
+//                        }
                         String title = user.firstUnseenVideo(videos);
                         if(title == null) {
                             message = new String("BestRatedUnseenRecommendation cannot be applied!");
@@ -879,8 +1248,111 @@ public final class Main {
                     output.put("message", message);
                     arrayResult.add(output);
                 }
+                if(action.getType().equals("popular")) {
+//                    System.out.println(filePath1);
+                    JSONObject output = new JSONObject();
+                    output.put("id", action.getActionId());
+                    String message;
+                    User user = searchUser(myUsers, action.getUsername());
+                    if(user == null || !(user.getSubscriptionType().equals("PREMIUM"))) {
+                        message = new String("PopularRecommendation cannot be applied!");
+                    } else {
+//                        if (filePath1.toString().equals("/Users/raresrosu/Desktop/VideosDB/tema/test_db/test_files/recommendation_invalid_user.json")) {
+//                            System.out.println(user.getUsername());
+//                            System.out.println("Filme: ");
+//                            for (Map.Entry<String, Integer> entry : user.getHistory().entrySet()) {
+//                                System.out.println(entry.getKey());
+//                            }
+//                        }
+                        HashMap<String, Integer> popularityOfGenres = new HashMap<>();
+                        HashMap<String, ArrayList<String>> videosOfGenres = new HashMap<>();
+                        initialisePopularityMap(popularityOfGenres, videos, videosOfGenres);
+                        List<String> genres = createListOfGenres(popularityOfGenres);
+
+                        // sortarea genurilor in functi de popularitate
+                        sortGenres(genres, popularityOfGenres); // fa sortarea si in functie de ordinea din database
+                        if(filePath1.toString().equals("/Users/raresrosu/Desktop/VideosDB/tema/test_db/test_files/recommendation_invalid_user.json")) {
+                            for(String gen : genres) {
+                                System.out.println("Genul: " + gen + " Popularitatea: " + popularityOfGenres.get(gen));
+                                System.out.println("Videourile: ");
+                                for(String title : videosOfGenres.get(gen)) {
+                                    System.out.println(title);
+                                }
+                            }
+                        }
+                        // gaseste primul video nevazut din cel mai popular gen
+                        String title = findFirstUnseenPopularVideo(genres, user,videosOfGenres);
+                        if(title != null) {
+                            message = new String("PopularRecommendation result: ");
+                            message = message + title;
+                        } else {
+                            message = new String("PopularRecommendation cannot be applied!");
+                        }
+                    }
+                    output.put("message", message);
+                    arrayResult.add(output);
+                }
+                if(action.getType().equals("favorite")) {
+                    JSONObject output = new JSONObject();
+                    output.put("id", action.getActionId());
+                    String message;
+                    User user = searchUser(myUsers, action.getUsername());
+                    if(user == null || !(user.getSubscriptionType().equals("PREMIUM"))) {
+                        message = new String("FavoriteRecommendation cannot be applied!");
+                    } else {
+                        // make a list with videos that appear at least once in favorites
+                        List<String> videosFromFavorites = createFavoriteList(myUsers);
+//                        if(filePath1.toString().equals("/Users/raresrosu/Desktop/VideosDB/tema/test_db/test_files/single_recommendation_favorite.json")) {
+//                            for(String favorite : videosFromFavorites) {
+//                                System.out.println(favorite);
+//                            }
+//                        }
+                        HashMap<String, Integer> occurencesInFavorites = new HashMap<>();
+                        initialiseFavoriteMap(occurencesInFavorites, myUsers);
+                        // sort videos by occurences in favorite lists
+                        sortFavoriteVidList(videosFromFavorites, occurencesInFavorites);// fa sortarea si in functie de ordinea din database
+                        // cauta primul film nevazut dupa acest criteriu
+                        String title = findFirstFavUnseen(user, videosFromFavorites);
+                        if(title != null) {
+                            message = new String("FavoriteRecommendation result: ");
+                            message = message + title;
+                        } else {
+                            message = new String("FavoriteRecommendation cannot be applied!");
+                        }
+                    }
+                    output.put("message", message);
+                    arrayResult.add(output);
+                }
+                if(action.getType().equals("search")) {
+//                    System.out.println(filePath1);
+                    JSONObject output = new JSONObject();
+                    output.put("id", action.getActionId());
+                    String message;
+                    User user = searchUser(myUsers, action.getUsername());
+                    if(user == null || !(user.getSubscriptionType().equals("PREMIUM"))) {
+                        message = new String("SearchRecommendation cannot be applied!");
+                    } else {
+                        List<Video> videosOfGenre = initialiseVideosOfGenre(videos, action.getGenre());
+
+                        sortByRating(videosOfGenre);
+
+                        List<Video> unseenVideos = videosUnseen(user, videosOfGenre);
+                        List<String> titles = new ArrayList<>();
+                        if (unseenVideos.size() > 0) {
+                            for (Video video : unseenVideos) {
+                                titles.add(video.getTitle());
+                            }
+                            message = new String("SearchRecommendation result: ");
+                            message = message + titles.toString();
+                        } else {
+                            message = new String("SearchRecommendation cannot be applied!");
+                        }
+                    }
+                    output.put("message", message);
+                    arrayResult.add(output);
+                }
             }
         }
         fileWriter.closeJSON(arrayResult);
     }
-}
+} // Uita-te bine pe queryuri din nou!!!!

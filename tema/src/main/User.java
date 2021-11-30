@@ -1,7 +1,6 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -28,10 +27,6 @@ public class User {
      */
     private ArrayList<String> ratedMovies;
     /**
-     * The list of rated seasons
-     */
-//    private Map<Integer, Integer> ratedSeasons;
-    /**
      * Movies added to favorites
      */
     private final ArrayList<String> favoriteMovies;
@@ -43,7 +38,6 @@ public class User {
         this.favoriteMovies = favoriteMovies;
         this.history = history;
         this.ratedMovies = new ArrayList<>();
-//        this.ratedSeasons = new HashMap<Integer, Integer>();
     }
 
     /**
@@ -77,24 +71,6 @@ public class User {
         return ratedMovies;
     }
     /**
-     * getter for ratedSeasons
-     */
-//    public Map<Integer, Integer> getRatedSeasons() {
-//        return ratedSeasons;
-//    }
-    /**
-     * function that verifies if a movie has been rated before
-     * by the user
-     */
-    public boolean verifyIfIsRated(final String movieTitle) {
-        for (String title : ratedMovies) {
-            if(title.equals(movieTitle)) {
-                return true;
-            }
-        }
-        return false;
-    }
-    /**
      * function that tries to add the title of a movie
      * to the favorite movies list. If the movie already exists
      * int the list it returns false -> meaning that the operation
@@ -124,27 +100,20 @@ public class User {
         return false;
     }
     /**
-     * tries to add movie to ratedMovies if it has been not rated before
-     */
-
-    /**
      * view method that tries to increment the number of views
      */
-    public String view(final String title, final int increment) {
+    public String view(final String title) {
         // caz cand a fost deja vazut
         if (verifyIfIsSeen(title)) {
             // increment the views
             Integer views = this.history.get(title);
-//            views += increment;
             views += 1;
             this.history.remove(title);
             this.history.put(title, views);
         } else {
             // daca nu a mai fost deja vazut
-//            this.history.put(title, increment);
             this.history.put(title, 1);
         }
-
         String message = new String("success -> ");
         message = message + title;
         String endString = new String(" was viewed with total views of ");
@@ -172,8 +141,6 @@ public class User {
                 String successMessage = new String("success -> ");
                 successMessage = successMessage + title;
                 String endString = new String(" was added as favourite");
-//                String viewsString = this.history.get(title).toString();
-//                endString = endString + viewsString;
                 successMessage = successMessage + endString;
                 return successMessage;
             }
@@ -186,26 +153,13 @@ public class User {
             return errorMessage;
         }
     }
-    public String firstUnseenVideo(List<Video> videos) {
-        for(Video video : videos) {
-            if(!(this.history.containsKey(video.getTitle()))) {
+    /**
+     * firstUnseenVideo method that finds the first video unseen by the user from a list of videos
+     */
+    public String firstUnseenVideo(final List<Video> videos) {
+        for (Video video : videos) {
+            if (!(this.history.containsKey(video.getTitle()))) {
                 return video.getTitle();
-            }
-        }
-        return null;
-    }
-    public Series firstUnseenSeries(List<Series> series) {
-        for(Series serial : series) {
-            if(!(this.history.containsKey(serial.getTitle()))) {
-                return serial;
-            }
-        }
-        return null;
-    }
-    public Movie firstBestUnseen(List<Movie> movies) {
-        for(Movie movie : movies) {
-            if(!(this.history.containsKey(movie.getTitle()))) {
-                return movie;
             }
         }
         return null;

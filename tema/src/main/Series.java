@@ -24,10 +24,36 @@ public final class Series extends Video {
      * The average of all ratings of the seasons of the serial
      */
     private Double averageRating;
+    /**
+     * The map where the key is the number of the season and the value
+     * is the list of users that rated that season
+     */
     private Map<Integer, ArrayList<String>> userWithRatedSeasons;
+    /**
+     * The views
+     */
     private int views;
+    /**
+     * The total number of views
+     */
+    private int totalViews;
+    /**
+     * The total number of occurences in favorite lists
+     */
     private int favoriteOccurences;
+    /**
+     * The total total duration of serial
+     */
     private int totalDuration;
+    /**
+     * Represents a status -> tells if we can apply incrementViews method or not
+     * If this method has been already applied for a show than the status is false
+     * and can't be applied anymore
+     */
+    private boolean goodToIncrement;
+    /**
+     * A list of users that seen the serial
+     */
     private List<String> usersThatSeen;
     public Series(final String title, final ArrayList<String> cast,
                   final ArrayList<String> genres,
@@ -41,8 +67,30 @@ public final class Series extends Video {
         this.views = 0;
         this.totalDuration = 0;
         this.usersThatSeen = new ArrayList<>();
+        this.totalViews = 0;
+        this.goodToIncrement = true;
     }
-
+    /**
+     * Getter for the total number of views
+     */
+    public int getTotalViews() {
+        return totalViews;
+    }
+    /**
+     * Getter for goodToIncrement status
+     */
+    public boolean getGoodToIncrement() {
+        return goodToIncrement;
+    }
+    /**
+     * Method that sets the status with false value
+     */
+    public void setFalse() {
+        this.goodToIncrement = false;
+    }
+    /**
+     * Getter for usersThatSeen list
+     */
     public List<String> getUsersThatSeen() {
         return usersThatSeen;
     }
@@ -64,23 +112,42 @@ public final class Series extends Video {
     public Double getAverageRating() {
         return averageRating;
     }
+    /**
+     * getter for favoriteOccurences
+     */
     public int getFavoriteOccurences() {
         return favoriteOccurences;
     }
+    /**
+     * getter for totalDuration
+     */
     public int getTotalDuration() {
         return totalDuration;
     }
+    /**
+     * getter for views
+     */
     public int getViews() {
         return views;
     }
+    /**
+     * method that increments the value of totalViews with the increment value
+     * given as parameter to the method
+     */
     public void incrementViews(final int increment) {
-        int add = this.views;
-        this.views = add + increment;
+        int add = this.totalViews;
+        this.totalViews = add + increment;
     }
+    /**
+     * method that increments the value of favoriteOccurences
+     */
     public void incrementFavoriteOccurences() {
         this.favoriteOccurences++;
     }
-    public Double calculateAverageRatingSeason(Season season) {
+    /**
+     * method that calculates the average rating of a season
+     */
+    public Double calculateAverageRatingSeason(final Season season) {
         Double average = 0.0;
         List<Double> ratings = season.getRatings();
         if (ratings.size() == 0) {
@@ -91,14 +158,19 @@ public final class Series extends Video {
         }
         return (average / (ratings.size()));
     }
+    /**
+     * method that calculates the total duration adding the durations of the seasons
+     */
     public void calculateTotalDuration() {
         int duration = 0;
-        for(Season season : this.seasons) {
+        for (Season season : this.seasons) {
             duration += season.getDuration();
-//            this.totalDuration += season.getDuration();
         }
         this.totalDuration = duration;
     }
+    /**
+     * method that calculates the average rating based on the seasons
+     */
     public void calculateAverageRatingSerial() {
         Double averageSerial = 0.0;
         for (Season season : this.seasons) {
@@ -111,7 +183,10 @@ public final class Series extends Video {
             this.averageRating = averageSerial / (this.seasons.size());
         }
     }
-
+    /**
+     * method that verifies if the user can rate a season
+     * If yes, the rating is added
+     */
     public String addRating(final User user, final Double grade, final int seasonNumber) {
         String message = new String();
         // se verifica daca userul a vazut deja serialul -> apeleaza verifyIfIsSeen
@@ -125,19 +200,8 @@ public final class Series extends Video {
             return message;
         }
         // se verifica daca userul a dat deja rate la serial
-//        if (this.userWithRatedSeasons.containsKey(user.getUsername())) {
-//            // userul a dat rate la serial, verificam si la ce sezon
-//            if(this.userWithRatedSeasons.get(user.getUsername()).equals(seasonNumber)) {
-//                // eroare -> user a dat deja rating la acest film
-//                String error = new String("error -> ");
-//                message = message + error;
-//                message = message + this.getTitle();
-//                String endString = new String(" has been already rated");
-//                message = message + endString;
-//                return message;
-//            }
-            if(this.userWithRatedSeasons.containsKey(seasonNumber)) { // sezonului i s-a aplicat rate
-                if(this.userWithRatedSeasons.get(seasonNumber).contains(user.getUsername())) {
+            if (this.userWithRatedSeasons.containsKey(seasonNumber)) {
+                if (this.userWithRatedSeasons.get(seasonNumber).contains(user.getUsername())) {
 //              eroare -> user a dat deja rating la acest sezon
                 String error = new String("error -> ");
                 message = message + error;
@@ -153,9 +217,6 @@ public final class Series extends Video {
                 this.userWithRatedSeasons.get(seasonNumber).add(user.getUsername());
             }
         // in acest caz se poate da rate la sezon
-//        this.userWithRatedSeasons.put(seasonNumber, user.getUsername());
-//        List<Double> ratings = this.seasons.get(seasonNumber - 1).getRatings();
-//        ratings.add(grade);
         user.getRatedMovies().add(this.getTitle());
         this.seasons.get(seasonNumber - 1).getRatings().add(grade);
         calculateAverageRatingSerial();
@@ -171,14 +232,22 @@ public final class Series extends Video {
         message = message + succes;
         return message;
     }
+    /**
+     * method that adds a serial in a list if it has been rated
+     */
     public void filterSeriesByRating(final List<Series> filteredSeries) {
-        if(this.averageRating != 0) {
+        if (this.averageRating != 0) {
             filteredSeries.add(this);
         }
     }
+    /**
+     * method that calculates the views of the serial
+     */
     public void calculateViews(final User user, final String title) {
-        if (user.getHistory().get(title) != null) {
-            this.views = user.getHistory().get(title);
+        if (this.views == 0) {
+            this.views += user.getHistory().get(title);
+        } else {
+            this.views++;
         }
     }
     /**
